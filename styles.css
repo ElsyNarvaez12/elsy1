@@ -1,0 +1,195 @@
+body {
+    font-family: 'Georgia', serif;
+    background: #d8c8b8; /* Color de fondo beige */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.book {
+    position: relative;
+    width: 600px;
+    height: 500px; /* Aumentamos la altura para dar espacio a la imagen */
+    perspective: 1000px;
+    border-radius: 10px;
+    background: #e6d6c6; /* Color de fondo beige más claro */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+}
+
+.cover, .page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.cover {
+    transform-origin: left center;
+    z-index: 3;
+    display: flex;
+    flex-direction: column; /* Para alinear la imagen y el texto verticalmente */
+    justify-content: center;
+    align-items: center;
+    background: #f2e4d6; /* Color de fondo crema */
+    border: 1px solid #b9a58d; /* Borde beige más oscuro */
+}
+
+.cover-front, .cover-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #5e4b3e; /* Color de texto marrón oscuro */
+}
+
+.cover-front {
+    background: url('https://i.pinimg.com/736x/d6/61/18/d66118e3d69b392376e5ec61c31d546c.jpg'), #f2e4d6; /* Textura de papel vintage */
+    background-size: auto, cover;
+    z-index: 2; /* Ajustamos el índice z para que la imagen quede encima del texto */
+    border: 1px solid #b9a5e; /* Borde beige más oscuro */
+    color: yellow;
+    }
+
+.cover-back {
+    background: url('https://www.transparenttextures.com/patterns/debut-light.png'), #f2e4d6; /* Textura de papel vintage */
+    background-size: auto, cover;
+    transform: rotateY(180deg);
+    border: 1px solid #b9a58d; /* Borde beige más oscuro */
+}
+
+.cover h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.cover .subtitle {
+    font-size: 1.2em;
+}
+
+.page {
+    transform-origin: left center;
+}
+
+.left-page, .right-page {
+    background-color: #f2e4d6; /* Color de fondo crema */
+    backface-visibility: hidden;
+    z-index: 2;
+}
+
+.left-page {
+    transform: rotateY(-180deg);
+}
+
+.right-page {
+    transform: rotateY(180deg);
+}
+
+.book.open .cover {
+    transform: rotateY(-180deg);
+}
+
+.book.open .left-page {
+    transform: rotateY(0deg);
+}
+
+.book.open .right-page {
+    transform: rotateY(0deg);
+}
+
+.content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    overflow: auto;
+    text-align: center;
+    position: relative; /* Cambiamos la posición a relativa para que los elementos internos sean posicionados relativamente */
+}
+
+
+}
+
+.content .balloon {
+    width: 50px; /* Tamaño del globo */
+    position: absolute;
+    top: 50px; /* Ajustamos la posición del globo */
+    left: 20px; /* Ajustamos la posición del globo */
+}
+
+.content h2 {
+    margin-top: 20px;
+    font-size: 2em;
+    color: #5e4b3e; /* Color de texto marrón oscuro */
+}
+
+.content p {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #5e4b3e; /* Color de texto marrón oscuro */
+    line-height: 1.6;
+}
+
+
+
+.profile-picture {
+    max-width: 200px; /* Ajusta el tamaño máximo de la imagen */
+    height: auto;
+    border-radius: 50%; /* Para hacer que la imagen sea circular */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombra suave */
+    position: absolute; /* Cambiamos la posición a absoluta */
+    top: 50%; /* Posicionamos la imagen en el centro vertical */
+    left: 50%; /* Posicionamos la imagen en el centro horizontal */
+    transform: translate(-50%, -50%); /* Centramos la imagen */
+    z-index: 3; /* Aseguramos que la imagen esté sobre el contenido */
+}
+
+.content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    overflow: auto;
+    text-align: center;
+    position: relative; /* Cambiamos la posición a relativa para que los elementos internos sean posicionados relativamente */
+    z-index: 2; /* Aseguramos que el contenido esté detrás de la imagen */
+}
+
+
+.balloons {
+    width: 50px;
+    height: 50px;
+    background-color: red; /* Color de los globos */
+    border-radius: 50%;
+    position: absolute;
+    top: -50px; /* Posición inicial arriba del libro */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translateX(-50%);
+    animation: balloonsAnimation 1s forwards;
+    opacity: 0; /* Los globos estarán inicialmente invisibles */
+}
+
+@keyframes balloonsAnimation {
+    0% {
+        top: -50px;
+        opacity: 0;
+    }
+    100% {
+        top: -100px; /* Posición final arriba del libro */
+        opacity: 1; /* Los globos serán visibles */
+    }
+}
+
